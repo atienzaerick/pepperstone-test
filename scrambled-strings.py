@@ -1,6 +1,6 @@
 """ Pepperstone - Scrambled Strings
     Sytax for running:
-    python3 scrambled-strings.py dict.txt input.txt
+    python3 scrambled-strings.py --dictionary dict.txt --input input.txt
 """
 import sys
 import re
