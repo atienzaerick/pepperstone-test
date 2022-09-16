@@ -4,6 +4,8 @@
 """
 import sys
 import re
+import os.path
+from xmlrpc.client import Boolean
 
 class ProcessDictionary():
     """class to process input file dictionary"""
@@ -82,5 +84,21 @@ def main(dictionary_lookup, input_lookup):
     input_dictionary = ProcessDictionary(dictionary_lookup)
     ProcessInput(input_lookup, input_dictionary)
 
+def validations() -> Boolean:
+    """Simple argument checking before proceeding"""
+    if len(sys.argv) != 5:
+        return False
+    if sys.argv[1] != "--dictionary":
+        return False
+    if sys.argv[3] != "--input":
+        return False
+    if not os.path.isfile(sys.argv[2]) or not os.path.isfile(sys.argv[4]):
+        return False
+    return True
+
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    if validations():
+        main(sys.argv[2], sys.argv[4])
+    else:
+        print("LOG: Invalid command arguments")
+        exit()
